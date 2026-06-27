@@ -1,19 +1,26 @@
 const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
+
+const routes = require("./routes");
 
 const app = express();
 
-// Middleware
+app.use(helmet());
 app.use(cors());
+app.use(morgan("dev"));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Health Check
 app.get("/", (req, res) => {
   res.json({
     success: true,
-    message: "Welcome to NewsLens API 🚀",
+    message: "NewsLens API is running 🚀",
   });
 });
+
+app.use("/api/v1", routes);
 
 module.exports = app;
