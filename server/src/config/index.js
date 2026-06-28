@@ -1,8 +1,9 @@
 
 const requiredEnvVars = [
   "PORT",
-  // "JWT_SECRET",
+  "JWT_SECRET",
   "GNEWS_API_KEY",
+  "MONGODB_URI",
 ];
 
 requiredEnvVars.forEach((key) => {
@@ -13,7 +14,7 @@ requiredEnvVars.forEach((key) => {
 
 module.exports = {
   port: process.env.PORT,
-  // jwtSecret: process.env.JWT_SECRET,
+  jwtSecret: process.env.JWT_SECRET,
   gnewsApiKey: process.env.GNEWS_API_KEY,
-  // mongoUri: process.env.MONGODB_URI,
+  mongoUri: process.env.MONGODB_URI,
 };
