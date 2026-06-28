@@ -1,37 +1,26 @@
 const newsService = require("./news.service");
-const ApiResponse = require("../../../utils/ApiResponse");
+const ApiResponse = require("../../utils/ApiResponse");
+const asyncHandler = require("../../utils/asyncHandler");
 
-const getTopHeadlines = async (req, res, next) => {
-  try {
-    const news = await newsService.getTopHeadlines(req.query);
+const getTopHeadlines = asyncHandler(async (req, res) => {
+  const news = await newsService.getTopHeadlines(req.query);
 
-    res.status(200).json(new ApiResponse(true, "Top headlines fetched successfully", news));
-  } catch (error) {
-    next(error);
-  }
-};
+  res.status(200).json(new ApiResponse(true, "Top headlines fetched successfully", news));
+});
 
-const searchNews = async (req, res, next) => {
-  try {
-    const news = await newsService.searchNews(req.query);
+const searchNews = asyncHandler(async (req, res) => {
+  const news = await newsService.searchNews(req.query);
 
-    res.json(news);
-  } catch (error) {
-    next(error);
-  }
-};
+  res.status(200).json(new ApiResponse(true, "News fetched successfully", news));
+});
 
-const getNewsByTopic = async (req, res, next) => {
-  try {
-    const { topic } = req.params;
+const getNewsByTopic = asyncHandler(async (req, res) => {
+  const { topic } = req.params;
 
-    const news = await newsService.getNewsByTopic(topic, req.query);
+  const news = await newsService.getNewsByTopic(topic, req.query);
 
-    res.json(news);
-  } catch (error) {
-    next(error);
-  }
-};
+  res.status(200).json(new ApiResponse(true, `${topic} news fetched successfully`, news));
+});
 
 module.exports = {
   getTopHeadlines,

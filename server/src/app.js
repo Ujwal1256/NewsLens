@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const errorHandler = require("./middleware/error.middleware");
+
 
 const routes = require("./routes");
 
@@ -22,5 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1", routes);
+
+app.use(errorHandler);
 
 module.exports = app;
