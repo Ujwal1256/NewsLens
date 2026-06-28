@@ -1,15 +1,7 @@
 const gnewsClient = require("../../../services/gnews.client");
 
-const getTopHeadlines = async () => {
-  const { data } = await gnewsClient.get("/top-headlines", {
-    params: {
-      country: "in",
-      lang: "en",
-      max: 10,
-    },
-  });
-
-  const articles = data.articles.map((article) => ({
+const formatArticles = (articles) => {
+  return articles.map((article) => ({
     title: article.title,
     description: article.description,
     image: article.image,
@@ -17,43 +9,65 @@ const getTopHeadlines = async () => {
     publishedAt: article.publishedAt,
     source: article.source.name,
   }));
-
-  return {
-    totalArticles: data.totalArticles,
-    articles,
-  };
 };
 
-const searchNews = async ({ q, page = 1, limit = 10, lang = "en", country = "in" }) => {
-  console.log("Searching for:", q);
-
-  const { data } = await gnewsClient.get("/search", {
+const getTopHeadlines = async ({ page = 1, limit = 10 }) => {
+  const { data } = await gnewsClient.get("/top-headlines", {
     params: {
-      q,
-      lang,
+      country: "in",
+      lang: "en",
       max: limit,
       page,
     },
   });
 
-  const articles = data.articles.map((article) => ({
-    title: article.title,
-    description: article.description,
-    image: article.image,
-    url: article.url,
-    source: article.source.name,
-    publishedAt: article.publishedAt,
-  }));
+  return {
+    totalArticles: data.totalArticles,
+    page,
+    limit,
+    articles: formatArticles(data.articles),
+  };
+};
+
+const searchNews = async ({ q, page = 1, limit = 10, lang = "en" }) => {
+  const { data } = await gnewsClient.get("/search", {
+    params: {
+      q,
+      lang,
+      page,
+      max: limit,
+    },
+  });
 
   return {
     totalArticles: data.totalArticles,
     page,
     limit,
-    articles,
+    articles: formatArticles(data.articles),
+  };
+};
+
+const getNewsByTopic = async (topic, { page = 1, limit = 10 }) => {
+  const { data } = await gnewsClient.get("/top-headlines", {
+    params: {
+      topic,
+      country: "in",
+      lang: "en",
+      max: limit,
+      page,
+    },
+  });
+
+  return {
+    totalArticles: data.totalArticles,
+    page,
+    limit,
+    articles: formatArticles(data.articles),
   };
 };
 
 module.exports = {
   getTopHeadlines,
   searchNews,
+  getNewsByTopic,
 };
