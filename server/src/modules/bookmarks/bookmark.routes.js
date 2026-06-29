@@ -1,11 +1,13 @@
 const express = require("express");
+const validate = require("../../middleware/validate.middleware");
+const { articleSchema } = require("../../validations/article.validation");
 
 const router = express.Router();
 
 const bookmarkController = require("./bookmark.controller");
 const authenticate = require("../../middleware/auth.middleware");
 
-router.post("/", authenticate, bookmarkController.createBookmark);
+router.post("/", authenticate, validate(articleSchema), bookmarkController.createBookmark);
 router.get("/", authenticate, bookmarkController.getBookmarks);
 router.delete("/:id", authenticate, bookmarkController.deleteBookmark);
 
