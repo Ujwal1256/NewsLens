@@ -1,10 +1,13 @@
 const History = require("../../models/history.model");
 const ApiError = require("../../utils/ApiError");
 
+const HTTP_STATUS = require("../../config/httpStatus");
+const MESSAGES = require("../../config/messages");
+
 const addToHistory = async (userId, article) => {
   const { title, description, image, url, source, publishedAt } = article;
 
-  const history = await History.findOneAndUpdate(
+  return History.findOneAndUpdate(
     {
       user: userId,
       url,
@@ -24,15 +27,15 @@ const addToHistory = async (userId, article) => {
       upsert: true,
     }
   );
-
-  return history;
 };
 
 const getHistory = async (userId) => {
-  return await History.find({
+  return History.find({
     user: userId,
   })
-    .sort({ viewedAt: -1 })
+    .sort({
+      viewedAt: -1,
+    })
     .limit(50);
 };
 
@@ -43,7 +46,10 @@ const deleteHistoryItem = async (historyId, userId) => {
   });
 
   if (!history) {
-    throw new ApiError(404, "History item not found");
+    throw new ApiError(
+      HTTP_STATUS.NOT_FOUND,
+      MESSAGES.HISTORY.NOT_FOUND
+    );
   }
 
   return history;
@@ -53,8 +59,6 @@ const clearHistory = async (userId) => {
   await History.deleteMany({
     user: userId,
   });
-
-  return;
 };
 
 module.exports = {

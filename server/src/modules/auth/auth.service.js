@@ -5,14 +5,28 @@ const config = require("../../config");
 const User = require("../../models/user.model");
 const ApiError = require("../../utils/ApiError");
 
+const {
+  BCRYPT_SALT_ROUNDS,
+  JWT_EXPIRES_IN,
+} = require("../../config/constants");
+
+const HTTP_STATUS = require("../../config/httpStatus");
+const MESSAGES = require("../../config/messages");
+
 const register = async ({ name, email, password }) => {
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {
-    throw new ApiError(409, "User already exists");
+    throw new ApiError(
+      HTTP_STATUS.CONFLICT,
+      MESSAGES.AUTH.USER_EXISTS
+    );
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(
+    password,
+    BCRYPT_SALT_ROUNDS
+  );
 
   const user = await User.create({
     name,
@@ -32,13 +46,19 @@ const login = async ({ email, password }) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    throw new ApiError(401, "Invalid email or password");
+    throw new ApiError(
+      HTTP_STATUS.UNAUTHORIZED,
+      MESSAGES.AUTH.INVALID_CREDENTIALS
+    );
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
 
   if (!isMatch) {
-    throw new ApiError(401, "Invalid email or password");
+    throw new ApiError(
+      HTTP_STATUS.UNAUTHORIZED,
+      MESSAGES.AUTH.INVALID_CREDENTIALS
+    );
   }
 
   const token = jwt.sign(
@@ -48,7 +68,7 @@ const login = async ({ email, password }) => {
     },
     config.jwtSecret,
     {
-      expiresIn: "7d",
+      expiresIn: JWT_EXPIRES_IN,
     }
   );
 

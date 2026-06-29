@@ -2,20 +2,38 @@ const historyService = require("./history.service");
 const asyncHandler = require("../../utils/asyncHandler");
 const ApiResponse = require("../../utils/ApiResponse");
 
-const addToHistory = asyncHandler(async (req, res) => {
-  const history = await historyService.addToHistory(req.user.id, req.body);
+const HTTP_STATUS = require("../../config/httpStatus");
+const MESSAGES = require("../../config/messages");
 
-  res.status(201).json(
-    new ApiResponse(true, "Article added to history", history)
+const addToHistory = asyncHandler(async (req, res) => {
+  const history = await historyService.addToHistory(
+    req.user.id,
+    req.body
   );
+
+  res
+    .status(HTTP_STATUS.CREATED)
+    .json(
+      new ApiResponse(
+        true,
+        MESSAGES.HISTORY.CREATED,
+        history
+      )
+    );
 });
 
 const getHistory = asyncHandler(async (req, res) => {
   const history = await historyService.getHistory(req.user.id);
 
-  res.status(200).json(
-    new ApiResponse(true, "History fetched successfully", history)
-  );
+  res
+    .status(HTTP_STATUS.OK)
+    .json(
+      new ApiResponse(
+        true,
+        MESSAGES.HISTORY.FETCHED,
+        history
+      )
+    );
 });
 
 const deleteHistoryItem = asyncHandler(async (req, res) => {
@@ -23,17 +41,27 @@ const deleteHistoryItem = asyncHandler(async (req, res) => {
 
   await historyService.deleteHistoryItem(id, req.user.id);
 
-  res.status(200).json(
-    new ApiResponse(true, "History item deleted successfully")
-  );
+  res
+    .status(HTTP_STATUS.OK)
+    .json(
+      new ApiResponse(
+        true,
+        MESSAGES.HISTORY.DELETED
+      )
+    );
 });
 
 const clearHistory = asyncHandler(async (req, res) => {
   await historyService.clearHistory(req.user.id);
 
-  res.status(200).json(
-    new ApiResponse(true, "History cleared successfully")
-  );
+  res
+    .status(HTTP_STATUS.OK)
+    .json(
+      new ApiResponse(
+        true,
+        MESSAGES.HISTORY.CLEARED
+      )
+    );
 });
 
 module.exports = {

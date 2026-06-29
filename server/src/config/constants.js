@@ -1,0 +1,10 @@
+module.exports = {
+  DEFAULT_COUNTRY: "in",
+  DEFAULT_LANGUAGE: "en",
+  DEFAULT_PAGE: 1,
+  DEFAULT_LIMIT: 10,
+
+  JWT_EXPIRES_IN: "7d",
+
+  BCRYPT_SALT_ROUNDS: 10,
+};
