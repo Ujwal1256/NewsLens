@@ -6,10 +6,10 @@ const {
   DEFAULT_LANGUAGE,
   DEFAULT_PAGE,
   DEFAULT_LIMIT,
-} = require("../../../config/constants");
+} = require("../../config/constants");
 
-const HTTP_STATUS = require("../../../config/httpStatus");
-const MESSAGES = require("../../../config/messages");
+const HTTP_STATUS = require("../../config/httpStatus");
+const MESSAGES = require("../../config/messages");
 
 const formatArticles = (articles = []) => {
   return articles.map((article) => ({

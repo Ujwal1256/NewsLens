@@ -1,5 +1,5 @@
 const axios = require("axios");
-const config = require("../src/config");
+const config = require("./src/config/index");
 
 const gnewsClient = axios.create({
   baseURL: "https://gnews.io/api/v4",
