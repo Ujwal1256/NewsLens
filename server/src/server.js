@@ -7,12 +7,7 @@ const connectDB = require("./database/mongodb");
 
 const startServer = async () => {
   try {
-    console.log("Before connectDB");
-
     await connectDB();
-
-    console.log("After connectDB");
-
     app.listen(config.port, "0.0.0.0", () => {
       console.log("Listening...");
     });
