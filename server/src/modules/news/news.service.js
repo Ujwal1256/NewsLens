@@ -22,10 +22,7 @@ const formatArticles = (articles = []) => {
   }));
 };
 
-const getTopHeadlines = async ({
-  page = DEFAULT_PAGE,
-  limit = DEFAULT_LIMIT,
-}) => {
+const getTopHeadlines = async ({ page = DEFAULT_PAGE, limit = DEFAULT_LIMIT }) => {
   try {
     const { data } = await gnewsClient.get("/top-headlines", {
       params: {
@@ -43,9 +40,15 @@ const getTopHeadlines = async ({
       articles: formatArticles(data.articles),
     };
   } catch (error) {
+    console.log("========== GNEWS ERROR ==========");
+    console.log("Status:", error.response?.status);
+    console.log("Data:", error.response?.data);
+    console.log("Message:", error.message);
+    console.log("================================");
+
     throw new ApiError(
       HTTP_STATUS.SERVICE_UNAVAILABLE,
-      MESSAGES.NEWS.TOP_HEADLINES_FAILED
+      error.response?.data?.errors?.join(", ") || error.message || "Unable to fetch top headlines"
     );
   }
 };
@@ -73,20 +76,11 @@ const searchNews = async ({
       articles: formatArticles(data.articles),
     };
   } catch (error) {
-    throw new ApiError(
-      HTTP_STATUS.SERVICE_UNAVAILABLE,
-      MESSAGES.NEWS.SEARCH_FAILED
-    );
+    throw new ApiError(HTTP_STATUS.SERVICE_UNAVAILABLE, MESSAGES.NEWS.SEARCH_FAILED);
   }
 };
 
-const getNewsByTopic = async (
-  topic,
-  {
-    page = DEFAULT_PAGE,
-    limit = DEFAULT_LIMIT,
-  }
-) => {
+const getNewsByTopic = async (topic, { page = DEFAULT_PAGE, limit = DEFAULT_LIMIT }) => {
   try {
     const { data } = await gnewsClient.get("/top-headlines", {
       params: {
@@ -105,10 +99,7 @@ const getNewsByTopic = async (
       articles: formatArticles(data.articles),
     };
   } catch (error) {
-    throw new ApiError(
-      HTTP_STATUS.SERVICE_UNAVAILABLE,
-      MESSAGES.NEWS.TOPIC_FAILED
-    );
+    throw new ApiError(HTTP_STATUS.SERVICE_UNAVAILABLE, MESSAGES.NEWS.TOPIC_FAILED);
   }
 };
 
