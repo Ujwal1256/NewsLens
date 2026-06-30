@@ -11,7 +11,9 @@ const options = {
 
     servers: [
       {
-        url: "http://localhost:5000/api/v1",
+        url: process.env.BASE_URL
+          ? `${process.env.BASE_URL}/api/v1`
+          : "http://localhost:5000/api/v1",
       },
     ],
 
@@ -32,9 +34,7 @@ const options = {
     ],
   },
 
-  apis: [
-    "./src/modules/**/*.routes.js",
-  ],
+  apis: ["./src/modules/**/*.routes.js"],
 };
 
 module.exports = swaggerJsdoc(options);
