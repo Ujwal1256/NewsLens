@@ -280,8 +280,8 @@ The backend can be deployed to:
 
 **Ujwal Jakhamate**
 
-- GitHub: https://github.com/<your-username>
-- LinkedIn: https://linkedin.com/in/<your-linkedin>
+- GitHub: https://github.com/Ujwal1256
+- LinkedIn: https://www.linkedin.com/in/ujwal-jakhamate-894182370
 
 ---
 
