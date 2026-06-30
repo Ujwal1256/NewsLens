@@ -1,5 +1,7 @@
 const gnewsClient = require("../../../services/gnews.client");
 const ApiError = require("../../utils/ApiError");
+const cache = require("../../utils/cache");
+const logger = require("../../utils/logger");
 
 const {
   DEFAULT_COUNTRY,
@@ -22,7 +24,26 @@ const formatArticles = (articles = []) => {
   }));
 };
 
+const handleApiError = (error, defaultMessage) => {
+  const status = error.response?.status || HTTP_STATUS.SERVICE_UNAVAILABLE;
+
+  const message = error.response?.data?.errors?.join(", ") || defaultMessage;
+
+  logger.error(message);
+
+  throw new ApiError(status, message);
+};
+
 const getTopHeadlines = async ({ page = DEFAULT_PAGE, limit = DEFAULT_LIMIT }) => {
+  const cacheKey = `top-headlines-${page}-${limit}`;
+
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    logger.info("Top headlines served from cache");
+    return cachedData;
+  }
+
   try {
     const { data } = await gnewsClient.get("/top-headlines", {
       params: {
@@ -33,23 +54,20 @@ const getTopHeadlines = async ({ page = DEFAULT_PAGE, limit = DEFAULT_LIMIT }) =
       },
     });
 
-    return {
+    const result = {
       totalArticles: data.totalArticles,
       page,
       limit,
       articles: formatArticles(data.articles),
     };
-  } catch (error) {
-    console.log("========== GNEWS ERROR ==========");
-    console.log("Status:", error.response?.status);
-    console.log("Data:", error.response?.data);
-    console.log("Message:", error.message);
-    console.log("================================");
 
-    throw new ApiError(
-      HTTP_STATUS.SERVICE_UNAVAILABLE,
-      error.response?.data?.errors?.join(", ") || error.message || "Unable to fetch top headlines"
-    );
+    cache.set(cacheKey, result);
+
+    logger.info("Top headlines fetched from GNews API");
+
+    return result;
+  } catch (error) {
+    handleApiError(error, MESSAGES.NEWS.TOP_HEADLINES_FAILED);
   }
 };
 
@@ -59,6 +77,15 @@ const searchNews = async ({
   limit = DEFAULT_LIMIT,
   lang = DEFAULT_LANGUAGE,
 }) => {
+  const cacheKey = `search-${q}-${page}-${limit}-${lang}`;
+
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    logger.info("Search results served from cache");
+    return cachedData;
+  }
+
   try {
     const { data } = await gnewsClient.get("/search", {
       params: {
@@ -69,18 +96,33 @@ const searchNews = async ({
       },
     });
 
-    return {
+    const result = {
       totalArticles: data.totalArticles,
       page,
       limit,
       articles: formatArticles(data.articles),
     };
+
+    cache.set(cacheKey, result);
+
+    logger.info("Search results fetched from GNews API");
+
+    return result;
   } catch (error) {
-    throw new ApiError(HTTP_STATUS.SERVICE_UNAVAILABLE, MESSAGES.NEWS.SEARCH_FAILED);
+    handleApiError(error, MESSAGES.NEWS.SEARCH_FAILED);
   }
 };
 
 const getNewsByTopic = async (topic, { page = DEFAULT_PAGE, limit = DEFAULT_LIMIT }) => {
+  const cacheKey = `topic-${topic}-${page}-${limit}`;
+
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    logger.info(`${topic} news served from cache`);
+    return cachedData;
+  }
+
   try {
     const { data } = await gnewsClient.get("/top-headlines", {
       params: {
@@ -92,14 +134,20 @@ const getNewsByTopic = async (topic, { page = DEFAULT_PAGE, limit = DEFAULT_LIMI
       },
     });
 
-    return {
+    const result = {
       totalArticles: data.totalArticles,
       page,
       limit,
       articles: formatArticles(data.articles),
     };
+
+    cache.set(cacheKey, result);
+
+    logger.info(`${topic} news fetched from GNews API`);
+
+    return result;
   } catch (error) {
-    throw new ApiError(HTTP_STATUS.SERVICE_UNAVAILABLE, MESSAGES.NEWS.TOPIC_FAILED);
+    handleApiError(error, MESSAGES.NEWS.TOPIC_FAILED);
   }
 };
 
