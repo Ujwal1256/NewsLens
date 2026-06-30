@@ -1,21 +1,44 @@
-import { useEffect } from "react";
-import axios from "axios";
+import useNews from "../../hooks/useNews";
+
+import SearchBar from "../../components/news/SearchBar";
+import CategoryTabs from "../../components/news/CategoryTabs";
+import NewsGrid from "../../components/news/NewsGrid";
 
 const Home = () => {
-  useEffect(() => {
-    axios
-      .get(
-        "https://newslens-backend-3rd0.onrender.com/api/v1/news/headlines?page=1&limit=10"
-      )
-      .then((res) => console.log(res.data))
-      .catch((err) => {
-        console.log("STATUS:", err.response?.status);
-        console.log("DATA:", err.response?.data);
-        console.log(err);
-      });
-  }, []);
+  const { articles, loading, error } = useNews();
 
-  return <h1>Home</h1>;
+  const handleSearch = (query) => {
+    console.log(query);
+  };
+
+  const handleCategoryChange = (category) => {
+    console.log(category);
+  };
+
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (error) {
+    return <h2>{error}</h2>;
+  }
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-8">
+      <h1 className="mb-6 text-3xl font-bold">
+        Top Headlines
+      </h1>
+
+      <SearchBar onSearch={handleSearch} />
+
+      <CategoryTabs
+        activeCategory="General"
+        onCategoryChange={handleCategoryChange}
+      />
+
+      <NewsGrid articles={articles} />
+    </section>
+  );
 };
 
 export default Home;

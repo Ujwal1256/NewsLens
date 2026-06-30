@@ -1,0 +1,92 @@
+{
+"success": true,
+"message": "Top headlines fetched successfully",
+"data": {
+"totalArticles": 535204,
+"page": "1",
+"limit": "10",
+"articles": [
+{
+"title": "Trump says U.S.-Iran meeting to take place in Qatar as Tehran denies any sit-down in coming days",
+"description": "Trump announces a meeting with Iran in Qatar, despite Tehran's denial of any talks with the U.S. side.",
+"image": "https://th-i.thgim.com/public/incoming/g2xapz/article71163192.ece/alternates/LANDSCAPE_1200/2026-06-29T195620Z_2012608847_RC2V3MAR8L98_RTRMADP_3_USA-TRUMP.JPG",
+"url": "https://www.thehindu.com/news/international/trump-says-meeting-with-iran-to-take-place-in-qatar/article71163181.ece",
+"publishedAt": "2026-06-29T21:28:27Z",
+"source": "The Hindu"
+},
+{
+"title": "In clean-up drive, ex-CEC Rajiv Kumar named HDFC chairman",
+"description": "India Business News: MUMBAI: The HDFC Bank board has appointed former chief election commissioner and ex–finance secretary Rajiv Kumar as chairman of the bank, subject to .",
+"image": "https://static.toiimg.com/thumb/msid-132079320,width-1280,height-720,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
+"url": "https://timesofindia.indiatimes.com/business/india-business/in-clean-up-drive-ex-cec-rajiv-kumar-named-hdfc-chairman/articleshow/132079321.cms",
+"publishedAt": "2026-06-29T20:55:00Z",
+"source": "The Times of India"
+},
+{
+"title": "India to push FATF to put Pakistan on terror list",
+"description": "India News: NEW DELHI: : India is likely to cite video and other evidence of Pakistan continuing its support to terror outfits, seeking to bring back Islamabad un.",
+"image": "https://static.toiimg.com/thumb/msid-132079298,width-1280,height-720,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
+"url": "https://timesofindia.indiatimes.com/india/india-to-push-fatf-to-put-pakistan-on-terror-list/articleshow/132079294.cms",
+"publishedAt": "2026-06-29T20:38:00Z",
+"source": "The Times of India"
+},
+{
+"title": "Nasa’s new look at the first black hole ever photographed reveals a surprising discovery about M87",
+"description": "Science News: When the world saw the first-ever image of a black hole in 2019, it marked one of the greatest achievements in modern astronomy. The glowing orange ri.",
+"image": "https://static.toiimg.com/thumb/msid-132078054,width-1280,height-720,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
+"url": "https://timesofindia.indiatimes.com/science/nasas-new-look-at-the-first-black-hole-ever-photographed-reveals-a-surprising-discovery-about-m87/articleshow/132078023.cms",
+"publishedAt": "2026-06-29T20:30:00Z",
+"source": "The Times of India"
+},
+{
+"title": "Avoid intentional screen time for under-twos, research urges",
+"description": "Using screens during the first 1001 days of life can lead to developmental concerns for the next generation, researchers warn.",
+"image": "https://scx2.b-cdn.net/gfx/news/hires/2026/infant-and-screen.jpg",
+"url": "https://medicalxpress.com/news/2026-06-intentional-screen-twos-urges.html",
+"publishedAt": "2026-06-29T20:00:07Z",
+"source": "Medical Xpress"
+},
+{
+"title": "Galaxy Z Fold 8 Ultra could get a big camera upgrade, while Flip 8 may miss out",
+"description": "A new report may have shed light on the camera situation for the Galaxy Z Fold 8 Ultra, Fold 8, and Flip 8.",
+"image": "https://www.androidauthority.com/wp-content/uploads/2025/07/Samsung-Galaxy-Z-Fold-7-in-Mint-showing-rear-camera-module.jpg",
+"url": "https://www.androidauthority.com/galaxy-z-fold-8-flip-8-camera-specs-3682537/",
+"publishedAt": "2026-06-29T19:58:08Z",
+"source": "Android Authority"
+},
+{
+"title": "'No negotiation at any level': Iran refutes Donald Trump's claim of planned US talks in Doha",
+"description": "Middle East News: Iran on Monday said that no negotiations with the United States are scheduled at any level in the coming days, contradicting US President Donald Trump.",
+"image": "https://static.toiimg.com/thumb/msid-132079162,width-1280,height-720,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
+"url": "https://timesofindia.indiatimes.com/world/middle-east/no-negotiation-at-any-level-iran-refutes-donald-trumps-claim-of-planned-us-talks-in-doha/articleshow/132079125.cms",
+"publishedAt": "2026-06-29T19:45:00Z",
+"source": "The Times of India"
+},
+{
+"title": "Brazil vs Japan, FIFA World Cup Highlights: Martinelli's stoppage-time goal caps Brazilian comeback in thrilling clash",
+"description": "The Hindu's Brazil vs Japan match coverage, LIVE scores of the Round of 32 match on June 29, 2026",
+"image": "https://th-i.thgim.com/public/incoming/xp9ch5/article71163064.ece/alternates/LANDSCAPE_1200/2283896302.jpg",
+"url": "https://www.thehindu.com/sport/football/bra-vs-jap-fifa-world-cup-live-round-of-32-match/article71162601.ece",
+"publishedAt": "2026-06-29T19:34:44Z",
+"source": "The Hindu"
+},
+{
+"title": "A rare dinosaur fossil from Antarctica is found tucked away in a drawer",
+"description": "Scientists have stumbled on a rare dinosaur fossil from Antarctica tucked in a drawer. It comes from the tail of a long-necked, plant-eating dinosaur called a titanosaur. The fossil was discovered in...",
+"image": "https://s.hdnux.com/photos/01/66/55/20/31118382/3/rawImage.jpg",
+"url": "https://www.sfgate.com/news/article/a-rare-dinosaur-fossil-from-antarctica-is-found-22325691.php",
+"publishedAt": "2026-06-29T19:24:33Z",
+"source": "SFGATE"
+},
+{
+"title": "US Supreme Court vastly expands Trump's presidential powers in landmark ruling",
+"description": "The US Supreme Court ruling significantly expands presidential authority over independent federal agencies and overturns a landmark 1935 precedent that had protected many regulators from being removed at will.",
+"image": "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202606/donald-trump-292036853-16x9_0.jpg?VersionId=UKC7cIs9JaFxSF1gNHTZFaHUwxSBz0gD",
+"url": "https://www.indiatoday.in/world/us-news/story/us-supreme-court-ftc-ruling-vastly-expands-presidential-powers-in-landmark-ruling-2937037-2026-06-30",
+"publishedAt": "2026-06-29T19:21:26Z",
+"source": "India Today"
+}
+]
+},
+"error": null
+}

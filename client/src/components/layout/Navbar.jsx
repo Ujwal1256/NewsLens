@@ -1,51 +1,47 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-white shadow-md">
-      <div className="container mx-auto flex items-center justify-between px-4 py-4">
-
-        <Link
+    <header className="bg-white shadow-md">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        <NavLink
           to="/"
           className="text-2xl font-bold text-blue-600"
         >
           NewsLens
-        </Link>
+        </NavLink>
 
-        <div className="flex gap-6">
-
-          <Link
+        <div className="flex items-center gap-6">
+          <NavLink
             to="/"
-            className="hover:text-blue-600"
+            className="hover:text-blue-600 transition-colors"
           >
             Home
-          </Link>
+          </NavLink>
 
-          <Link
+          <NavLink
             to="/bookmarks"
-            className="hover:text-blue-600"
+            className="hover:text-blue-600 transition-colors"
           >
             Bookmarks
-          </Link>
+          </NavLink>
 
-          <Link
+          <NavLink
             to="/history"
-            className="hover:text-blue-600"
+            className="hover:text-blue-600 transition-colors"
           >
             History
-          </Link>
+          </NavLink>
 
-          <Link
+          <NavLink
             to="/login"
-            className="hover:text-blue-600"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
           >
             Login
-          </Link>
-
+          </NavLink>
         </div>
-
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 
