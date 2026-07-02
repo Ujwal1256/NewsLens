@@ -1,17 +1,28 @@
-import newsData from "../data/news.json";
+import api from "../api/axios";
 
-export const getTopHeadlines = async () => {
-  return newsData.data;
+export const getTopHeadlines = async (page = 1, limit = 10) => {
+  const response = await api.get("/news/headlines", {
+    params: {
+      page,
+      limit,
+    },
+  });
+
+  return response.data.data;
 };
 
 export const searchNews = async (query) => {
-  console.log(query);
+  const response = await api.get("/news/search", {
+    params: {
+      q: query,
+    },
+  });
 
-  return newsData.data;
+  return response.data.data;
 };
 
 export const getNewsByCategory = async (category) => {
-  console.log(category);
+  const response = await api.get(`/news/topics/${category}`);
 
-  return newsData.data;
+  return response.data.data;
 };

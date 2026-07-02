@@ -1,24 +1,45 @@
 import { useEffect, useState } from "react";
-import { getTopHeadlines } from "../services/news.service";
+
+import {
+  getTopHeadlines,
+  searchNews,
+  getNewsByCategory,
+} from "../services/news.service";
 
 const useNews = () => {
   const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const fetchNews = async () => {
+  const executeRequest = async (request) => {
     try {
       setLoading(true);
+      setError(null);
 
-      const data = await getTopHeadlines();
+      const data = await request();
 
       setArticles(data.articles);
-    } catch (err) {
-      setError(err.message || "Something went wrong.");
+    } catch (error) {
+      console.error("News Request Error:", error);
+
+      const errorMessage =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        error.message ||
+        "Something went wrong.";
+
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
   };
+
+  const fetchNews = () => executeRequest(() => getTopHeadlines());
+
+  const searchArticles = (query) => executeRequest(() => searchNews(query));
+
+  const filterByCategory = (category) =>
+    executeRequest(() => getNewsByCategory(category.toLowerCase()));
 
   useEffect(() => {
     fetchNews();
@@ -29,6 +50,8 @@ const useNews = () => {
     loading,
     error,
     fetchNews,
+    searchArticles,
+    filterByCategory,
   };
 };
 
