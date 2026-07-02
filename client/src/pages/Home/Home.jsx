@@ -22,26 +22,32 @@ const Home = () => {
 
   const [activeCategory, setActiveCategory] = useState("General");
 
-  const pageTitle = "Top Headlines";
+  const [pageTitle, setPageTitle] = useState("Top Headlines");
 
   const handleSearch = async (query) => {
     if (!query.trim()) {
-      fetchNews();
+      setPageTitle("Top Headlines");
+      setActiveCategory("General");
+      await fetchNews();
       return;
     }
+
+    setPageTitle(`Search Results for "${query}"`);
+    setActiveCategory("General");
 
     await searchArticles(query);
   };
 
   const handleCategoryChange = async (category) => {
-  console.log("Selected Category:", category);
-
   setActiveCategory(category);
 
   if (category === "General") {
+    setPageTitle("Top Headlines");
     await fetchNews();
     return;
   }
+
+  setPageTitle(`${category} News`);
 
   await filterByCategory(category);
 };

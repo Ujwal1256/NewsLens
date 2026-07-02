@@ -14,6 +14,8 @@ const NewsImage = ({ src, alt, className }) => {
       src={imageSrc}
       alt={alt}
       className={className}
+      loading="lazy"
+      decoding="async"
       onError={() => setImageSrc(newsPlaceholder)}
     />
   );
